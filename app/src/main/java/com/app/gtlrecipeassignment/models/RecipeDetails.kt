@@ -8,5 +8,6 @@ data class RecipeDetails(
     val instructions: String? = null,
     val summary: String? = null,
     val title: String? = null,
+    val extendedIngredients: List<Ingredients>? = null,
     val date: Date = Date(),
 )

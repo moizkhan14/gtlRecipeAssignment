@@ -6,6 +6,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * Created by Moiz Khan on 31/12/21
+ */
 interface ApiService {
 
     @GET("recipes/search")

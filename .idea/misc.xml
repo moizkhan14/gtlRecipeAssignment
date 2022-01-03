@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/activity_recipe_details.xml" value="0.1" />
+        <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/fragment_ingredients.xml" value="0.16576086956521738" />
+        <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/fragment_instructions.xml" value="0.16576086956521738" />
+        <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/fragment_summary.xml" value="0.16576086956521738" />
+        <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/item_ingredients_recycler.xml" value="0.1" />
         <entry key="..\:/Paractice/GtlRecipeAssignment/app/src/main/res/layout/activity_home.xml" value="0.21666666666666667" />
         <entry key="..\:/Paractice/GtlRecipeAssignment/app/src/main/res/layout/activity_recipe_details.xml" value="0.1" />
         <entry key="..\:/Paractice/GtlRecipeAssignment/app/src/main/res/layout/item_recipe_recycler.xml" value="0.1" />

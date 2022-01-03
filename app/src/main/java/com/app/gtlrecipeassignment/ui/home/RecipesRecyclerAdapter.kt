@@ -9,6 +9,9 @@ import com.app.gtlrecipeassignment.interfaces.ClickInterface
 import com.app.gtlrecipeassignment.models.Recipe
 import com.bumptech.glide.Glide
 
+/**
+ * Created by Moiz Khan on 31/12/21
+ */
 class RecipesRecyclerAdapter :
     RecyclerView.Adapter<RecipesRecyclerAdapter.RecipeItemViewHolder>() {
 

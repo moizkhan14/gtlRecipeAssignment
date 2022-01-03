@@ -3,4 +3,10 @@
 
     <string name="search_empty_error">Must enter any item to search.</string>
     <string name="recipe_image">Recipe Image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="summary">Summary</string>
+    <string name="instructions">Instruction</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="quantity">Quantity:</string>
 </resources>

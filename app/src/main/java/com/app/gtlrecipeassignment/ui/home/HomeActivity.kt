@@ -17,6 +17,9 @@ import com.app.gtlrecipeassignment.utils.NetworkCallStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**
+ * Created by Moiz Khan on 31/12/21
+ */
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), ClickInterface {
 
