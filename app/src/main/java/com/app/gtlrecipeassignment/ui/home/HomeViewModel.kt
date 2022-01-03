@@ -19,6 +19,10 @@ class HomeViewModel @Inject constructor(private val recipesRepository: RecipesRe
     ViewModel() {
     private var fetchedRecipes: MutableLiveData<Resource<RecipesResponse>> = MutableLiveData()
 
+    init {
+        searchForRecipe("")
+    }
+
     fun searchForRecipe(query: String) {
         fetchedRecipes.value = Resource(NetworkCallStatus.LOADING, null, "")
         try {

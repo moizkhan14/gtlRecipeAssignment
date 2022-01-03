@@ -2,17 +2,21 @@ package com.app.gtlrecipeassignment.repository
 
 import com.app.gtlrecipeassignment.api.ApiService
 import com.app.gtlrecipeassignment.constants.AppConstants
+import com.app.gtlrecipeassignment.localdb.RecipeDetailsDao
 import com.app.gtlrecipeassignment.models.RecipeDetails
 import com.app.gtlrecipeassignment.models.RecipesResponse
 import com.app.gtlrecipeassignment.resources.Resource
 import com.app.gtlrecipeassignment.utils.NetworkCallStatus
 import kotlinx.coroutines.*
+import java.util.*
 import javax.inject.Inject
 
 /**
  * Created by Moiz Khan on 31/12/21
  */
-class RepositoryImpl @Inject constructor(private val apiService: ApiService) : RecipesRepository {
+class RepositoryImpl @Inject constructor(
+    private val apiService: ApiService
+) : RecipesRepository {
     override suspend fun getRecipes(query: String): Resource<RecipesResponse> =
         withContext(Dispatchers.IO) {
             try {
@@ -20,10 +24,14 @@ class RepositoryImpl @Inject constructor(private val apiService: ApiService) : R
                 if (recipes?.results != null) {
                     return@withContext Resource(NetworkCallStatus.SUCCESS, recipes, null)
                 } else {
-                    return@withContext Resource(NetworkCallStatus.ERROR, null, "An error occured")
+                    return@withContext Resource(
+                        NetworkCallStatus.ERROR,
+                        null,
+                        "Error in fetching recipes."
+                    )
                 }
-            } catch (exc: Exception) {
-                return@withContext Resource(NetworkCallStatus.ERROR, null, exc.message)
+            } catch (ex: Exception) {
+                return@withContext Resource(NetworkCallStatus.ERROR, null, ex.message)
             }
         }
 
@@ -31,15 +39,19 @@ class RepositoryImpl @Inject constructor(private val apiService: ApiService) : R
     override suspend fun getRecipeDetails(recipeId: Int): Resource<RecipeDetails> =
         withContext(Dispatchers.IO) {
             try {
-                val recipeInfo = apiService.getRecipeDetails(recipeId, AppConstants.API_KEY)
-                if (recipeInfo != null) {
-
-                    return@withContext Resource(NetworkCallStatus.SUCCESS, recipeInfo, null)
+                val recipeDetails = apiService.getRecipeDetails(recipeId, AppConstants.API_KEY)
+                if (recipeDetails != null) {
+                   // recipeDetailsDao.insertRecipeDetails(recipeDetails)
+                    return@withContext Resource(NetworkCallStatus.SUCCESS, recipeDetails, null)
                 } else {
-                    return@withContext Resource(NetworkCallStatus.ERROR, null, "An error occured")
+                    return@withContext Resource(
+                        NetworkCallStatus.ERROR,
+                        null,
+                        "Error in fetching details."
+                    )
                 }
-            } catch (exc: Exception) {
-                return@withContext Resource(NetworkCallStatus.ERROR, null, exc.message)
+            } catch (ex: Exception) {
+                return@withContext Resource(NetworkCallStatus.ERROR, null, ex.message)
             }
         }
 }

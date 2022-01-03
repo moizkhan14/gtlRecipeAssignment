@@ -16,6 +16,13 @@ import com.app.gtlrecipeassignment.utils.AppUtils
 import com.app.gtlrecipeassignment.utils.NetworkCallStatus
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import android.view.inputmethod.EditorInfo
+
+import android.widget.TextView
+
+import android.widget.EditText
+import android.widget.TextView.OnEditorActionListener
+
 
 /**
  * Created by Moiz Khan on 31/12/21
@@ -34,6 +41,7 @@ class HomeActivity : AppCompatActivity(), ClickInterface {
 
         setObserver()
         registerClicks()
+        setImeActions()
         setRecyclerView()
     }
 
@@ -41,6 +49,15 @@ class HomeActivity : AppCompatActivity(), ClickInterface {
         binding.searchImageView.setOnClickListener {
             searchForRecipes()
         }
+    }
+
+    private fun setImeActions(){
+        binding.searchEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                searchForRecipes()
+                true
+            } else false
+        })
     }
 
     private fun searchForRecipes() {

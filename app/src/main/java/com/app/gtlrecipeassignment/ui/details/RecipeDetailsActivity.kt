@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.app.gtlrecipeassignment.R
@@ -11,6 +13,7 @@ import com.app.gtlrecipeassignment.databinding.ActivityRecipeDetailsBinding
 import com.app.gtlrecipeassignment.ui.details.fragments.IngredientsFragment
 import com.app.gtlrecipeassignment.ui.details.fragments.InstructionsFragment
 import com.app.gtlrecipeassignment.ui.details.fragments.SummaryFragment
+import com.app.gtlrecipeassignment.utils.NetworkCallStatus
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -32,7 +35,7 @@ class RecipeDetailsActivity : AppCompatActivity() {
         }
     }
 
-   private val recipeDetailsViewModel: RecipeDetailsViewModel by viewModels()
+    private val recipeDetailsViewModel: RecipeDetailsViewModel by viewModels()
     lateinit var binding: ActivityRecipeDetailsBinding
 
     @Inject
@@ -45,6 +48,7 @@ class RecipeDetailsActivity : AppCompatActivity() {
 
         setFragmentsToAdapter()
         setViewPager()
+        setObserver()
         recipeID?.let { id ->
             recipeDetailsViewModel.fetchRecipeDetails(id)
         }
@@ -71,5 +75,18 @@ class RecipeDetailsActivity : AppCompatActivity() {
                 IngredientsFragment(),
             )
         )
+    }
+
+    private fun setObserver() {
+        recipeDetailsViewModel.getRecipeDetailsObservable().observe(this, { response ->
+            when (response.status) {
+                NetworkCallStatus.SUCCESS -> binding.progressBar.visibility = View.GONE
+                NetworkCallStatus.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                }
+                NetworkCallStatus.LOADING -> binding.progressBar.visibility = View.VISIBLE
+            }
+        })
     }
 }

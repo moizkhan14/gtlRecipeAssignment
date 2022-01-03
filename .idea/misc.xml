@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/drawable/round_edge_rectangle.xml" value="0.18385416666666668" />
+        <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/activity_home.xml" value="0.3333333333333333" />
         <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/activity_recipe_details.xml" value="0.1" />
         <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/fragment_ingredients.xml" value="0.16576086956521738" />
         <entry key="..\:/GtlAssignment/SearchRecipe/app/src/main/res/layout/fragment_instructions.xml" value="0.16576086956521738" />
