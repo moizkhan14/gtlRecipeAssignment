@@ -31,7 +31,7 @@ import android.widget.TextView.OnEditorActionListener
 class HomeActivity : AppCompatActivity(), ClickInterface {
 
     private val homeViewModel: HomeViewModel by viewModels()
-    lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
     @Inject
     lateinit var adapter: RecipesRecyclerAdapter
 

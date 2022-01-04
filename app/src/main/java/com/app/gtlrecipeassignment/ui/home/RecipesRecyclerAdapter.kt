@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.gtlrecipeassignment.constants.AppConstants
 import com.app.gtlrecipeassignment.databinding.ItemRecipeRecyclerBinding
 import com.app.gtlrecipeassignment.interfaces.ClickInterface
 import com.app.gtlrecipeassignment.models.Recipe
@@ -16,11 +17,9 @@ class RecipesRecyclerAdapter :
     RecyclerView.Adapter<RecipesRecyclerAdapter.RecipeItemViewHolder>() {
 
     private var recipes: List<Recipe> = mutableListOf()
-    private lateinit var context: Context
     private lateinit var listener: ClickInterface
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeItemViewHolder {
-        context = parent.context
         return RecipeItemViewHolder(
             ItemRecipeRecyclerBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -33,7 +32,7 @@ class RecipesRecyclerAdapter :
     override fun onBindViewHolder(holder: RecipeItemViewHolder, position: Int) {
         holder.binding.recipeTitleTextView.text = recipes[position].title
         Glide.with(holder.binding.root.context)
-            .load("https://spoonacular.com/recipeImages/${recipes[position].image}")
+            .load("${AppConstants.SOURCE_BASE_URL}${recipes[position].image}")
             .into(holder.binding.recipeImageView)
         holder.binding.root.setOnClickListener {
             listener.onClick(recipes[position])

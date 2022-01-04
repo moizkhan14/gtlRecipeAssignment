@@ -42,9 +42,10 @@ object AppModule {
     @Singleton
     @Provides
     fun getRecipeRepository(
-        recipeService: ApiService
+        recipeService: ApiService,
+        recipeDetailsDao: RecipeDetailsDao
     ): RecipesRepository =
-        RepositoryImpl(recipeService)
+        RepositoryImpl(recipeService, recipeDetailsDao)
 
     @Singleton
     @Provides

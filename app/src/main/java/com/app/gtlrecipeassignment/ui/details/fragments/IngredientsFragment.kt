@@ -24,12 +24,10 @@ class IngredientsFragment : Fragment() {
 
     private val recipeDetailViewModel: RecipeDetailsViewModel by activityViewModels()
     private lateinit var binding: FragmentIngredientsBinding
+
     @Inject
     lateinit var adapter: IngredientsRecyclerAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +50,10 @@ class IngredientsFragment : Fragment() {
     }
 
     private fun setRecycler() {
-        binding.ingredientsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.ingredientsRecyclerView.adapter = adapter
+        binding.apply {
+            ingredientsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            ingredientsRecyclerView.adapter = adapter
+        }
+
     }
 }

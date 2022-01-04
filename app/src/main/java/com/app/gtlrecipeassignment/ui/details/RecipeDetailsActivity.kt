@@ -36,7 +36,7 @@ class RecipeDetailsActivity : AppCompatActivity() {
     }
 
     private val recipeDetailsViewModel: RecipeDetailsViewModel by viewModels()
-    lateinit var binding: ActivityRecipeDetailsBinding
+    private lateinit var binding: ActivityRecipeDetailsBinding
 
     @Inject
     lateinit var adapter: RecipeDetailsPagerAdapter

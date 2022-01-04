@@ -17,17 +17,17 @@ abstract class RecipeDetailsDatabase : RoomDatabase() {
     abstract fun getDao(): RecipeDetailsDao
 
     companion object {
+        @Volatile
         private var DB_INSTANCE: RecipeDetailsDatabase? = null
 
         fun getDatabaseInstance(context: Context): RecipeDetailsDatabase {
-            if (DB_INSTANCE == null) {
-                DB_INSTANCE = Room.databaseBuilder(
+            return DB_INSTANCE ?: synchronized(this) {
+                DB_INSTANCE ?: Room.databaseBuilder(
                     context,
                     RecipeDetailsDatabase::class.java,
                     "RECIPE_DETAILS"
-                ).build()
+                ).build().also { instance -> DB_INSTANCE = instance }
             }
-            return DB_INSTANCE!!
         }
     }
 }

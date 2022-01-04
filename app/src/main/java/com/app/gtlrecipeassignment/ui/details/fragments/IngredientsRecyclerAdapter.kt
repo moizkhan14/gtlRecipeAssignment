@@ -1,6 +1,5 @@
 package com.app.gtlrecipeassignment.ui.details.fragments
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,10 +14,8 @@ class IngredientsRecyclerAdapter :
     RecyclerView.Adapter<IngredientsRecyclerAdapter.IngredientsViewHolder>() {
 
     private var ingredients: List<Ingredients> = mutableListOf()
-    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientsViewHolder {
-        context = parent.context
         return IngredientsViewHolder(
             ItemIngredientsRecyclerBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -30,7 +27,7 @@ class IngredientsRecyclerAdapter :
 
     override fun onBindViewHolder(holder: IngredientsViewHolder, position: Int) {
         val ingredient =
-            "${ingredients[position].originalString}\n${context.getString(R.string.quantity)} ${ingredients[position].amount} ${ingredients[position].unit}"
+            "${ingredients[position].originalString}\n${holder.binding.root.context.getString(R.string.quantity)} ${ingredients[position].amount} ${ingredients[position].unit}"
         holder.binding.ingredientsTextView.text = ingredient
     }
 
@@ -40,6 +37,7 @@ class IngredientsRecyclerAdapter :
 
     fun getIngredients(ingredients: List<Ingredients>) {
         this.ingredients = ingredients
+        notifyDataSetChanged()
     }
 
     class IngredientsViewHolder(val binding: ItemIngredientsRecyclerBinding) :

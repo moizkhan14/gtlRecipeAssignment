@@ -22,10 +22,6 @@ class SummaryFragment : Fragment() {
     private val recipeDetailViewModel: RecipeDetailsViewModel by activityViewModels()
     private lateinit var binding: FragmentSummaryBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

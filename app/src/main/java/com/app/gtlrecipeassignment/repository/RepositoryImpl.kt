@@ -15,7 +15,8 @@ import javax.inject.Inject
  * Created by Moiz Khan on 31/12/21
  */
 class RepositoryImpl @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val recipeDetailsDao: RecipeDetailsDao
 ) : RecipesRepository {
     override suspend fun getRecipes(query: String): Resource<RecipesResponse> =
         withContext(Dispatchers.IO) {
@@ -39,9 +40,21 @@ class RepositoryImpl @Inject constructor(
     override suspend fun getRecipeDetails(recipeId: Int): Resource<RecipeDetails> =
         withContext(Dispatchers.IO) {
             try {
+                val detailsFromDb = recipeDetailsDao.getRecipeDetails(recipeId)
+                // Here we will check is data stored on db is stored with in 7 days. If it is then we will restore it
+                // and pass it to observer else call api.
+                if (detailsFromDb != null) {
+                    val calendar = Calendar.getInstance(Locale.getDefault())
+                    calendar.time = detailsFromDb.date
+                    calendar.add(Calendar.DAY_OF_YEAR, 7)
+                    if (detailsFromDb.date.before(calendar.time)) {
+                        return@withContext Resource(NetworkCallStatus.SUCCESS, detailsFromDb, null)
+                    }
+                }
+
                 val recipeDetails = apiService.getRecipeDetails(recipeId, AppConstants.API_KEY)
                 if (recipeDetails != null) {
-                   // recipeDetailsDao.insertRecipeDetails(recipeDetails)
+                    recipeDetailsDao.insertRecipeDetails(recipeDetails)
                     return@withContext Resource(NetworkCallStatus.SUCCESS, recipeDetails, null)
                 } else {
                     return@withContext Resource(

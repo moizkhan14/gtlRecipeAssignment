@@ -13,9 +13,9 @@ import dagger.hilt.android.scopes.ActivityScoped
 @InstallIn(ActivityComponent::class)
 class HomeActivityModule {
 
-   @ActivityScoped
+    @ActivityScoped
     @Provides
-    fun getAdapter():RecipesRecyclerAdapter{
+    fun getAdapter(): RecipesRecyclerAdapter {
         return RecipesRecyclerAdapter()
     }
 }

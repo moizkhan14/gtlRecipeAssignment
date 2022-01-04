@@ -32,15 +32,4 @@ class DataTypeConverters {
     fun convertIngredientsListToString(ingredients: List<Ingredients>): String {
         return Gson().toJson(ingredients)
     }
-/*
-    @TypeConverter
-    fun convertFetchedStringToIngredients(value: String?): Ingredients? {
-        val listType: Type = object : TypeToken<Ingredients>() {}.type
-        return Gson().fromJson(value, listType)
-    }
-
-    @TypeConverter
-    fun convertIngredientsToString(ingredient: Ingredients): String {
-        return Gson().toJson(ingredient)
-    }*/
 }

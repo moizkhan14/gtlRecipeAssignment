@@ -21,13 +21,7 @@ class RecipeDetailsActivityModule {
 
     @ActivityScoped
     @Provides
-    fun getPagerAdapter(@FragmentScoped fragmentActivity : FragmentActivity): RecipeDetailsPagerAdapter{
+    fun getPagerAdapter(@FragmentScoped fragmentActivity: FragmentActivity): RecipeDetailsPagerAdapter {
         return RecipeDetailsPagerAdapter(fragmentActivity)
-    }
-
-    @ActivityScoped
-    @Provides
-    fun getAdapter(): IngredientsRecyclerAdapter {
-        return IngredientsRecyclerAdapter()
     }
 }
